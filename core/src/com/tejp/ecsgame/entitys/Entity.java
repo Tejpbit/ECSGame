@@ -2,27 +2,32 @@ package com.tejp.ecsgame.entitys;
 
 import com.tejp.ecsgame.components.Component;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Tejpbit on 2014-07-05.
  */
 public abstract class Entity {
 
-	private List<Component> components;
+	private final Map<Long, Component> components = new HashMap<>();
 	private long bitPattern;
 
 	public long getBitPattern() {
 		return bitPattern;
 	}
 
+	public <T extends Component> T getComponent (long bitPattern) {
+		return (T) components.get(bitPattern);
+	}
+
 	public void addComponent(Component component) {
-		if (components.add(component))
-			bitPattern |= component.getBitPattern();
+		components.put(component.getBitPattern(), component);
+		bitPattern |= component.getBitPattern();
 	}
 
 	public void removeComponent(Component component) {
-		if (components.remove(component))
-			bitPattern &= ~component.getBitPattern();
+		components.remove(component);
+		bitPattern &= ~component.getBitPattern();
 	}
 }

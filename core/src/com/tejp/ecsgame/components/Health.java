@@ -5,6 +5,8 @@ package com.tejp.ecsgame.components;
  */
 public class Health implements Component {
 
+	public static final long BIT_PATTERN = 0b0001;
+
 	private int health;
 
 	public Health(int health) {

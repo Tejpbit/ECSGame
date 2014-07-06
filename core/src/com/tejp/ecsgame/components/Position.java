@@ -7,7 +7,13 @@ import com.tejp.ecsgame.Vector2D;
  */
 public class Position implements Component {
 
+	public static final long BIT_PATTERN = 0b0010;
+
 	private Vector2D posVector;
+
+	public Position (int x, int y) {
+		this(new Vector2D(x, y));
+	}
 
 	public Position(Vector2D posVector) {
 		this.posVector = posVector;
@@ -15,6 +21,18 @@ public class Position implements Component {
 
 	public Position() {
 		posVector = new Vector2D(0, 0);
+	}
+
+	public void setPosition(int x, int y) {
+		posVector = new Vector2D(x, y);
+	}
+
+	public void setPosition(Vector2D posVector) {
+		this.posVector = posVector;
+	}
+
+	public Vector2D getVector() {
+		return posVector;
 	}
 
 	@Override

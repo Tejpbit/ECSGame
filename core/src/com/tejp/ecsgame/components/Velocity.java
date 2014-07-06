@@ -7,6 +7,8 @@ import com.tejp.ecsgame.Vector2D;
  */
 public class Velocity implements Component {
 
+	public static final long BIT_PATTERN = 0b0100;
+
 	private Vector2D velocity;
 
 	public Velocity(Vector2D velocity) {
@@ -14,6 +16,15 @@ public class Velocity implements Component {
 	}
 
 	public Velocity() {
+		this(new Vector2D(0, 0));
+	}
+
+	public Vector2D getVector() {
+		return velocity;
+	}
+
+	public void setVelocity(Vector2D velocity) {
+		this.velocity = velocity;
 	}
 
 	@Override

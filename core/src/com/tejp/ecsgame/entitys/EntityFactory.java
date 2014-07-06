@@ -1,6 +1,7 @@
 package com.tejp.ecsgame.entitys;
 
 import com.tejp.ecsgame.components.Health;
+import com.tejp.ecsgame.components.Input;
 import com.tejp.ecsgame.components.Position;
 import com.tejp.ecsgame.components.Velocity;
 
@@ -14,7 +15,7 @@ public enum EntityFactory {
 		return INSTANCE;
 	}
 
-	public static Player getPlayer() {
-		return new Player(new Health(), new Position(), new Velocity());
+	public Player getPlayer(Input input) {
+		return new Player(new Health(), new Position(), new Velocity(), input);
 	}
 }
