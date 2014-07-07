@@ -1,8 +1,8 @@
 package com.tejp.ecsgame.Modules;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.tejp.ecsgame.ECSGame;
 import com.tejp.ecsgame.components.Position;
 import com.tejp.ecsgame.components.Sprite;
 import com.tejp.ecsgame.entitys.Entity;
@@ -12,13 +12,12 @@ import com.tejp.ecsgame.entitys.Entity;
  */
 public class Renderer implements Module {
 
+	private SpriteBatch spriteBatch;
+	private float stateTime;
 
-	@Override
-	public long getBitPattern() {
-		return Sprite.BIT_PATTERN | Position.BIT_PATTERN;
+	public Renderer(SpriteBatch spriteBatch) {
+		this.spriteBatch = spriteBatch;
 	}
-
-	float stateTime;
 
 	@Override
 	public void doAction(Entity entity) {
@@ -28,6 +27,11 @@ public class Renderer implements Module {
 		stateTime += Gdx.graphics.getDeltaTime();
 
 		TextureRegion frame = sprite.getAnimation().getKeyFrame(stateTime, true);
-		ECSGame.batch.draw(frame, (int)pos.getVector().getX(), (int)pos.getVector().getY());
+		spriteBatch.draw(frame, (int)pos.getVector().getX(), (int)pos.getVector().getY());
+	}
+
+	@Override
+	public long getBitPattern() {
+		return Sprite.BIT_PATTERN | Position.BIT_PATTERN;
 	}
 }

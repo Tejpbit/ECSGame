@@ -14,4 +14,6 @@ public interface Input extends Component {
 	}
 
 	Vector2D getInput();
+
+	void updateInput();
 }

@@ -17,6 +17,7 @@ public class Move implements Module {
 	public void doAction (Entity entity) {
 		Velocity velocity = entity.getComponent(Velocity.BIT_PATTERN);
 		Position position = entity.getComponent(Position.BIT_PATTERN);
+
 		if (velocity.getVector().getMagnitude() < 0.001) {
 			return;
 		}

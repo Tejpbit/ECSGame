@@ -16,6 +16,7 @@ public class DesktopInput implements Input {
 		return input;
 	}
 
+	@Override
 	public void updateInput() {
 		Direction direction = Direction.getDirection(
 				Gdx.input.isKeyPressed(Keys.LEFT),
