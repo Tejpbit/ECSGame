@@ -37,6 +37,6 @@ public class Position implements Component {
 
 	@Override
 	public long getBitPattern() {
-		return 0b0010;
+		return BIT_PATTERN;
 	}
 }

@@ -3,6 +3,7 @@ package com.tejp.ecsgame.entitys;
 import com.tejp.ecsgame.Modules.InputHandler;
 import com.tejp.ecsgame.Modules.Module;
 import com.tejp.ecsgame.Modules.Move;
+import com.tejp.ecsgame.Modules.Renderer;
 import com.tejp.ecsgame.Vector2D;
 import com.tejp.ecsgame.components.Input;
 import com.tejp.ecsgame.components.Position;
@@ -29,6 +30,7 @@ public class Game {
 		entities.add(player);
 		modules.add(new Move());
 		modules.add(new InputHandler());
+		modules.add(new Renderer());
 	}
 
 	public void update() {

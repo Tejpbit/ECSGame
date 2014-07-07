@@ -23,7 +23,5 @@ public class Move implements Module {
 		position.setPosition(
 				position.getVector().add(velocity.getVector())
 		);
-
-		System.out.println(position.getVector().getX() + " " + position.getVector().getY());
 	}
 }

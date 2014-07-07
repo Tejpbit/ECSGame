@@ -18,6 +18,6 @@ public class Health implements Component {
 
 	@Override
 	public long getBitPattern() {
-		return 0b0001;
+		return BIT_PATTERN;
 	}
 }

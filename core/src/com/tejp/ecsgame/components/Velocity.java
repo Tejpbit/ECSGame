@@ -29,6 +29,6 @@ public class Velocity implements Component {
 
 	@Override
 	public long getBitPattern() {
-		return 0b0100;
+		return BIT_PATTERN;
 	}
 }

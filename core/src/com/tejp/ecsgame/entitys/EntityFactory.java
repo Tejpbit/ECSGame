@@ -1,9 +1,10 @@
 package com.tejp.ecsgame.entitys;
 
-import com.tejp.ecsgame.components.Health;
-import com.tejp.ecsgame.components.Input;
-import com.tejp.ecsgame.components.Position;
-import com.tejp.ecsgame.components.Velocity;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.tejp.ecsgame.components.*;
 
 /**
  * Created by Tejpbit on 2014-07-05.
@@ -16,6 +17,13 @@ public enum EntityFactory {
 	}
 
 	public Player getPlayer(Input input) {
-		return new Player(new Health(), new Position(), new Velocity(), input);
+		FileHandle  file1 = new FileHandle("monsters-32x32.png");
+		TextureRegion spriteTexture1 = new TextureRegion(new Texture(file1));
+		FileHandle  file2 = new FileHandle("badlogic.jpg");
+		TextureRegion spriteTexture2 = new TextureRegion(new Texture(file2));
+
+		Animation anim = new Animation(100, spriteTexture1, spriteTexture2);
+
+		return new Player(new Health(), new Position(), new Velocity(), new Sprite(anim), input);
 	}
 }

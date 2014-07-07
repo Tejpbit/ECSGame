@@ -1,5 +1,7 @@
 package com.tejp.ecsgame.components;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
+
 /**
  * Created by Tejpbit on 2014-07-07.
  */
@@ -7,10 +9,14 @@ public class Sprite implements Component {
 
 	public static final long BIT_PATTERN = 0b00000000000000000000000000001000;
 
-	private String[] texturePathArr;
+	private Animation anim;
 
-	public Sprite(String... texturePaths) {
-		texturePathArr = texturePaths;
+	public Sprite(Animation anim) {
+		this.anim = anim;
+	}
+
+	public Animation getAnimation() {
+		return anim;
 	}
 
 	@Override
