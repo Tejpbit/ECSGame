@@ -11,16 +11,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tejp.ecsgame.entitys.Game;
 
 public class ECSGame extends ApplicationAdapter {
-	private SpriteBatch batch;
+	public static SpriteBatch batch;
 	private Sprite sprite;
 	private Texture img;
 	private Camera camera;
 
 	private Game game;
-	private DesktopInput desktopInput = new DesktopInput(); //TODO dependency injection till konstruktorn. Skicka input från de olika launchersarna till en kontruktor här.
+	private final DesktopInput desktopInput = new DesktopInput(); //TODO dependency injection till konstruktorn. Skicka input från de olika launchersarna till en kontruktor här.
 
 	@Override
-	public void create () {
+	public void create() {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		camera = new OrthographicCamera(1280, 720);
@@ -31,9 +31,9 @@ public class ECSGame extends ApplicationAdapter {
 	}
 
 	@Override
-	public void render () {
+	public void render() {
 		desktopInput.updateInput();
-		game.update();
+//		game.update();
 
 		Vector2D newCameraPos = game.getCameraPosition();
 		camera.position.set((float)newCameraPos.getX(), (float)newCameraPos.getY(), 0);
@@ -44,7 +44,7 @@ public class ECSGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		sprite.draw(batch);
-
+		game.update();
 		batch.end();
 	}
 }

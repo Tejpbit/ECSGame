@@ -22,7 +22,7 @@ public enum EntityFactory {
 		FileHandle  file2 = new FileHandle("badlogic.jpg");
 		TextureRegion spriteTexture2 = new TextureRegion(new Texture(file2));
 
-		Animation anim = new Animation(100, spriteTexture1, spriteTexture2);
+		Animation anim = new Animation(0.1f, spriteTexture1, spriteTexture2);
 
 		return new Player(new Health(), new Position(), new Velocity(), new Sprite(anim), input);
 	}
