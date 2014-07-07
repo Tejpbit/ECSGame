@@ -7,7 +7,7 @@ import com.tejp.ecsgame.Vector2D;
  */
 public class Position implements Component {
 
-	public static final long BIT_PATTERN = 0b0010;
+	public static final long BIT_PATTERN = 0b00000000000000000000000000000100;
 
 	private Vector2D posVector;
 

@@ -7,7 +7,7 @@ import com.tejp.ecsgame.Vector2D;
  */
 public class Velocity implements Component {
 
-	public static final long BIT_PATTERN = 0b0100;
+	public static final long BIT_PATTERN = 0b00000000000000000000000000010000;
 
 	private Vector2D velocity;
 

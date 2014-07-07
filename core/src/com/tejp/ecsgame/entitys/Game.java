@@ -3,7 +3,9 @@ package com.tejp.ecsgame.entitys;
 import com.tejp.ecsgame.Modules.InputHandler;
 import com.tejp.ecsgame.Modules.Module;
 import com.tejp.ecsgame.Modules.Move;
+import com.tejp.ecsgame.Vector2D;
 import com.tejp.ecsgame.components.Input;
+import com.tejp.ecsgame.components.Position;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -19,14 +21,22 @@ public class Game {
 
 	private EntityFactory entityFactory = EntityFactory.INSTANCE;
 
+	private Position cameraPosition;
+
 	public Game(Input input) {
-		entities.add(entityFactory.getPlayer(input));
+		Player player = entityFactory.getPlayer(input);
+		cameraPosition = player.getComponent(Position.BIT_PATTERN);
+		entities.add(player);
 		modules.add(new Move());
 		modules.add(new InputHandler());
 	}
 
 	public void update() {
 		modules.forEach(m -> getMatchingEntitys(m.getBitPattern()).forEach(e -> m.doAction(e)));
+	}
+
+	public Vector2D getCameraPosition() {
+		return cameraPosition.getVector();
 	}
 
 	public Collection<Entity> getAllEntitys() {

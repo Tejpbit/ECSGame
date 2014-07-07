@@ -26,6 +26,5 @@ public class DesktopInput implements Input {
 
 		direction = Direction.getDirection(direction.getX(), -direction.getY());
 		input = direction.getVector();
-		System.out.println("WHAT? " + input.getX() + " " + input.getY());
 	}
 }
