@@ -27,12 +27,11 @@ public class ECSGame extends ApplicationAdapter {
 		sprite = new Sprite(img);
 		sprite.setOrigin(0, 0);
 		sprite.setPosition(0, 0);
+
 	}
 
 	@Override
 	public void render() {
-//		game.update();
-
 		Vector2D newCameraPos = game.getCameraPosition();
 		camera.position.set((float) newCameraPos.getX(), (float) newCameraPos.getY(), 0);
 		camera.update();

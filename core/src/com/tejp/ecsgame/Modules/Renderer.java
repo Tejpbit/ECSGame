@@ -2,9 +2,11 @@ package com.tejp.ecsgame.Modules;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.tejp.ecsgame.Direction;
+import com.tejp.ecsgame.Vector2D;
 import com.tejp.ecsgame.components.Position;
 import com.tejp.ecsgame.components.Sprite;
+import com.tejp.ecsgame.components.Velocity;
 import com.tejp.ecsgame.entitys.Entity;
 
 /**
@@ -23,15 +25,22 @@ public class Renderer implements Module {
 	public void doAction(Entity entity) {
 		Sprite sprite = entity.getComponent(Sprite.BIT_PATTERN);
 		Position pos = entity.getComponent(Position.BIT_PATTERN);
+		Vector2D vector = ((Velocity)entity.getComponent(Velocity.BIT_PATTERN)).getVector();
 
 		stateTime += Gdx.graphics.getDeltaTime();
 
-		TextureRegion frame = sprite.getAnimation().getKeyFrame(stateTime, true);
-		spriteBatch.draw(frame, (int)pos.getVector().getX(), (int)pos.getVector().getY());
+		Direction direction = Direction.getDirection(vector.getX(), vector.getY(), true);
+		System.out.println(direction);
+
+		spriteBatch.draw(
+				sprite.getTextureToRender(direction, stateTime),
+				(int) pos.getVector().getX(),
+				(int) pos.getVector().getY()
+		);
 	}
 
 	@Override
 	public long getBitPattern() {
-		return Sprite.BIT_PATTERN | Position.BIT_PATTERN;
+		return Sprite.BIT_PATTERN | Position.BIT_PATTERN | Velocity.BIT_PATTERN;
 	}
 }

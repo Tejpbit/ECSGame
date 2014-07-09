@@ -31,7 +31,15 @@ public enum Direction {
         return new Vector2D(x, y);
     }
 
-	public static Direction getDirection(int x, int y) {
+	/**
+	 *
+	 * @param invertY (if y is up instead of the default down)
+	 */
+	public static Direction getDirection(double x, double y, boolean invertY) {
+		return getDirection(x, -y);
+	}
+
+	public static Direction getDirection(double x, double y) {
 		boolean goingLeft = x < 0;
 		boolean goingRight = x > 0;
 		boolean goingUp = y < 0;
