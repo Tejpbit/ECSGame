@@ -27,7 +27,6 @@ public class ECSGame extends ApplicationAdapter {
 		sprite = new Sprite(img);
 		sprite.setOrigin(0, 0);
 		sprite.setPosition(0, 0);
-
 	}
 
 	@Override
