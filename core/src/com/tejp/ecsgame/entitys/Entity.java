@@ -32,6 +32,11 @@ public class Entity {
 		bitPattern &= ~component.getBitPattern();
 	}
 
+	public boolean hasComponent(long bitPattern) {
+
+		return (this.bitPattern & bitPattern) == bitPattern;
+	}
+
 	public long getBitPattern() {
 		return bitPattern;
 	}

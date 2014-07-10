@@ -2,13 +2,15 @@ package com.tejp.ecsgame.entitys;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tejp.ecsgame.DesktopInput;
-import com.tejp.ecsgame.modules.*;
 import com.tejp.ecsgame.Vector2D;
+import com.tejp.ecsgame.components.Collision;
 import com.tejp.ecsgame.components.Input;
 import com.tejp.ecsgame.components.Position;
+import com.tejp.ecsgame.modules.*;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,7 +19,8 @@ import java.util.Set;
 public class Game {
 
 	private Set<Entity> entities = new HashSet<>();
-	private Set<Module> modules = new HashSet<>();
+	private Set<Module> activeModules = new HashSet<>();
+	private Set<Module> passiveModules = new HashSet();
 
 	private EntityFactory entityFactory = EntityFactory.INSTANCE;
 
@@ -26,20 +29,31 @@ public class Game {
 	Input input = new DesktopInput(); // TODO vilken sorts input det är ska bestämmas beroende på vilken platform det körs på. men för tillfället bryr jag mig inte
 
 	public Game(SpriteBatch spriteBatch) {
+		activeModules.add(new Move());
+		activeModules.add(new InputHandler());
+		activeModules.add(new AnimationRenderer(spriteBatch));
+		activeModules.add(new StaticRenderer(spriteBatch));
+
+		CollisionModule cm = new CollisionModule();
+		passiveModules.add(cm);
+
+		List<Entity> entitiesToAdd = entityFactory.getRandomTestEntities();
 		Entity player = entityFactory.getPlayer(input);
 		cameraPosition = player.getComponent(Position.BIT_PATTERN);
-		entities.add(player);
-		entities.addAll(entityFactory.getRandomTestEntities());
+		entitiesToAdd.add(player);
 
-		modules.add(new Move());
-		modules.add(new InputHandler());
-		modules.add(new AnimationRenderer(spriteBatch));
-		modules.add(new StaticRenderer(spriteBatch));
+		for (Entity entity : entitiesToAdd) {
+			if (entity.hasComponent(Position.BIT_PATTERN | Collision.BIT_PATTERN)) {
+				cm.addCollisionEntity(entity);
+			}
+		}
+
+		entities.addAll(entitiesToAdd);
 	}
 
 	public void update() {
 		input.updateInput();
-		modules.forEach(m -> getMatchingEntitys(m.getBitPattern()).forEach(e -> m.doAction(e)));
+		activeModules.forEach(m -> getMatchingEntitys(m.getBitPattern()).forEach(e -> m.doAction(e)));
 	}
 
 	public Vector2D getCameraPosition() {

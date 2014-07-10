@@ -3,6 +3,8 @@ package com.tejp.ecsgame.modules;
 import com.tejp.ecsgame.components.Position;
 import com.tejp.ecsgame.components.Velocity;
 import com.tejp.ecsgame.entitys.Entity;
+import com.tejp.ecsgame.event.Event;
+import com.tejp.ecsgame.event.EventHandler;
 
 /**
  * Created by Tejpbit on 2014-07-06.
@@ -24,5 +26,7 @@ public class Move implements Module {
 		position.setPosition(
 				position.getVector().add(velocity.getVector())
 		);
+
+		EventHandler.INSTANCE.report(Event.MOVE, entity);
 	}
 }

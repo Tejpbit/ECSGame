@@ -3,6 +3,7 @@ package com.tejp.ecsgame.event;
 import com.tejp.ecsgame.entitys.Entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
 public enum EventHandler {
 	INSTANCE;
 
-	Map<Event, List<EventListener>> categorizedEventListeners;
+	private final Map<Event, List<EventListener>> categorizedEventListeners = new HashMap<>();
 
 	/**
 	 *
@@ -35,7 +36,7 @@ public enum EventHandler {
 	}
 
 	public void report(Event event, Entity entity) {
-		categorizedEventListeners.get(event).forEach(el -> el.onEvent(event, entity));
+		categorizedEventListeners.getOrDefault(event, new ArrayList<>()).forEach(el -> el.onEvent(event, entity));
 	}
 
 }
