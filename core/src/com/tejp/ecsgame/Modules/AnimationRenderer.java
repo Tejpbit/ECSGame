@@ -1,4 +1,4 @@
-package com.tejp.ecsgame.Modules;
+package com.tejp.ecsgame.modules;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,12 +12,12 @@ import com.tejp.ecsgame.entitys.Entity;
 /**
  * Created by Tejpbit on 2014-07-07.
  */
-public class Renderer implements Module {
+public class AnimationRenderer implements Module {
 
 	private SpriteBatch spriteBatch;
 	private float stateTime;
 
-	public Renderer(SpriteBatch spriteBatch) {
+	public AnimationRenderer(SpriteBatch spriteBatch) {
 		this.spriteBatch = spriteBatch;
 	}
 
@@ -30,7 +30,6 @@ public class Renderer implements Module {
 		stateTime += Gdx.graphics.getDeltaTime();
 
 		Direction direction = Direction.getDirection(vector.getX(), vector.getY(), true);
-		System.out.println(direction);
 
 		spriteBatch.draw(
 				sprite.getTextureToRender(direction, stateTime),

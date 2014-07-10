@@ -4,12 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.tejp.ecsgame.Direction;
 import com.tejp.ecsgame.components.*;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
 /**
@@ -22,10 +21,16 @@ public enum EntityFactory {
 		return INSTANCE;
 	}
 
-	public Player getPlayer(Input input) {
+	public List<Entity> getRandomTestEntities() {
+		List<Entity> entities = new ArrayList<>();
 
+		entities.add(new Entity(new Position(100, 100), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
 
-		return new Player(new Health(), new Position(), new Velocity(), new Sprite(getCreatureAnimation("phoenix.png")), input); //TODO MAGIC STRING?
+		return entities;
+	}
+
+	public Entity getPlayer(Input input) {
+		return new Entity(new Health(), new Position(), new Velocity(), new Collision(new Rectangle(0, 0, 32, 32)), new Sprite(getCreatureAnimation("phoenix.png")), input); //TODO MAGIC STRING?
 	}
 
 	private Map<Direction, Animation>getCreatureAnimation(String src) {

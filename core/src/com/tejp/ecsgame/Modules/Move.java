@@ -1,4 +1,4 @@
-package com.tejp.ecsgame.Modules;
+package com.tejp.ecsgame.modules;
 
 import com.tejp.ecsgame.components.Position;
 import com.tejp.ecsgame.components.Velocity;

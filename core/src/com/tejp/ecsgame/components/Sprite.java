@@ -21,8 +21,6 @@ public class Sprite implements Component {
 		this.anim = anim;
 	}
 
-
-
 	public TextureRegion getTextureToRender(Direction direction, float stateTime) {
 		if (direction == Direction.NONE)
 			return anim.get(lastMoveDirection).getKeyFrame(0);

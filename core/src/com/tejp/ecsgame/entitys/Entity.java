@@ -8,13 +8,14 @@ import java.util.Map;
 /**
  * Created by Tejpbit on 2014-07-05.
  */
-public abstract class Entity {
+public class Entity {
 
 	private final Map<Long, Component> components = new HashMap<>();
 	private long bitPattern;
 
-	public long getBitPattern() {
-		return bitPattern;
+	public Entity(Component... components) {
+		for (Component component : components)
+			addComponent(component);
 	}
 
 	public <T extends Component> T getComponent (long bitPattern) {
@@ -29,5 +30,9 @@ public abstract class Entity {
 	public void removeComponent(Component component) {
 		components.remove(component);
 		bitPattern &= ~component.getBitPattern();
+	}
+
+	public long getBitPattern() {
+		return bitPattern;
 	}
 }
