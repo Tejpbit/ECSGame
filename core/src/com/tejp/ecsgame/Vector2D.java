@@ -40,8 +40,9 @@ public final class Vector2D {
         return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
     }
 
-    public Vector2D add(Vector2D vector) {
-        return new Vector2D(x + vector.x, y + vector.y);
+    public void add(Vector2D vector) {
+	    x += vector.x;
+	    y += vector.y;
     }
 
     public double getY() {

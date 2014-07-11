@@ -24,11 +24,10 @@ public class Move implements Module {
 		if (velocity.getVector().getMagnitude() < 0.001) {
 			return;
 		}
-		position.setPosition(
-				position.getVector().add(velocity.getVector())
-		);
 
-		
+		position.move(velocity.getVector());
+
+
 
 		EventHandler.INSTANCE.report(new MoveEvent(entity));
 		//TODO När ett event skickas från CollisionModule så kan Move ( eller annan modul lyssna)

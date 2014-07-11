@@ -31,6 +31,10 @@ public class Position implements Component {
 		this.posVector = posVector;
 	}
 
+	public void move(Vector2D vector) {
+		this.posVector.add(vector);
+	}
+
 	public Vector2D getVector() {
 		return posVector;
 	}
