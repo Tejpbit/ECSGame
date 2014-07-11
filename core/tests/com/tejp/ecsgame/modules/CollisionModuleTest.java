@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.tejp.ecsgame.components.Collision;
 import com.tejp.ecsgame.components.Position;
 import com.tejp.ecsgame.entitys.Entity;
-import com.tejp.ecsgame.event.Event;
+import com.tejp.ecsgame.event.CollisionEvent;
 import com.tejp.ecsgame.event.EventHandler;
 import com.tejp.ecsgame.event.EventListener;
 import org.junit.Before;
@@ -24,10 +24,12 @@ public class CollisionModuleTest {
 	public void testDoAction() throws Exception {
 		Entity e = new Entity(new Position(3, 5), new Collision(new Rectangle(0, 0, 4, 4)));
 
-		EventHandler.INSTANCE.addListener(Event.COLLISION, new EventListener() {
+		boolean collision = false;
+
+		EventHandler.INSTANCE.addListener(CollisionEvent.class, new EventListener<CollisionEvent>() {
 			@Override
-			public void onEvent(Event event, Entity entity) {
-				System.out.println("yeeeep");
+			public void onEvent(CollisionEvent event) {
+				System.out.println("Yeeep!");
 			}
 		});
 

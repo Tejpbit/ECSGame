@@ -5,22 +5,24 @@ import com.tejp.ecsgame.Vector2D;
 import com.tejp.ecsgame.components.Collision;
 import com.tejp.ecsgame.components.Position;
 import com.tejp.ecsgame.entitys.Entity;
-import com.tejp.ecsgame.event.Event;
+import com.tejp.ecsgame.event.CollisionEvent;
 import com.tejp.ecsgame.event.EventHandler;
 import com.tejp.ecsgame.event.EventListener;
+import com.tejp.ecsgame.event.MoveEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Tejpbit on 2014-07-10.
  */
-public class CollisionModule implements Module, EventListener{
+public class CollisionModule implements Module, EventListener<MoveEvent> {
 
 	List<Entity> entitiesWithCollision = new ArrayList<>();
 
 	public CollisionModule() {
-		EventHandler.INSTANCE.addListener(Event.MOVE, this);
+		EventHandler.INSTANCE.addListener(MoveEvent.class, this);
 	}
 
 	@Override
@@ -33,8 +35,8 @@ public class CollisionModule implements Module, EventListener{
 	}
 
 	@Override
-	public void onEvent(Event event, Entity entity) {
-		doAction(entity);
+	public void onEvent(MoveEvent event) {
+		doAction(event.getEntity());
 	}
 
 	@Override
@@ -45,7 +47,7 @@ public class CollisionModule implements Module, EventListener{
 		float left = (float)position.getX();
 		float bot = (float)position.getY();
 
-		boolean overlapping =
+		Optional<Entity> overlappingEntity =
 			isOverlapping(
 				entity,
 				left,
@@ -53,14 +55,10 @@ public class CollisionModule implements Module, EventListener{
 				left + collision.width,
 				bot
 			);
-
-		System.out.println(overlapping);
-
-		if (overlapping)
-			EventHandler.INSTANCE.report(Event.COLLISION, entity);
+		overlappingEntity.ifPresent(e -> EventHandler.INSTANCE.report(new CollisionEvent(entity, e)));
 	}
 
-	private boolean isOverlapping(Entity entityToCheck, float left, float top, float right, float bot) {
+	private Optional<Entity> isOverlapping(Entity entityToCheck, float left, float top, float right, float bot) {
 		for (Entity entity : entitiesWithCollision) {
 			if (entityToCheck == entity) {
 				continue;
@@ -73,8 +71,8 @@ public class CollisionModule implements Module, EventListener{
 			float top2 = bot2 + collision.height;
 
 			if (left < right2 && right > left2 && top > bot2 && bot < top2)
-				return true;
+				return Optional.of(entity);
 		}
-		return false;
+		return Optional.empty();
 	}
 }

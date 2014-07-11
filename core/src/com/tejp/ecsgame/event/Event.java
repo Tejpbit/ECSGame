@@ -1,8 +1,7 @@
 package com.tejp.ecsgame.event;
 
 /**
- * Created by Tejpbit on 2014-07-10.
+ * Created by Tejpbit on 2014-07-11.
  */
-public enum Event {
-	COLLISION, MOVE;
+public interface Event {
 }
