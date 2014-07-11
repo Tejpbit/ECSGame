@@ -70,6 +70,10 @@ public class CollisionModule implements Module, EventListener<MoveEvent> {
 			float bot2 = (float)position.getY();
 			float top2 = bot2 + collision.height;
 
+			//TODO räkna ut ints för denna kollen och gör kollen genom att jämföra med noll.
+			//skicka sedan med ints i collisionEventet som säger hur långt in i varandra entitysarna är.
+			//sen är det bara kolla vilken av dem som är störst.
+
 			if (left < right2 && right > left2 && top > bot2 && bot < top2)
 				return Optional.of(entity);
 		}
