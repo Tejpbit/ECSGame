@@ -16,6 +16,7 @@ public class Move implements Module {
 		return Velocity.BIT_PATTERN | Position.BIT_PATTERN;
 	}
 
+	@Override
 	public void doAction (Entity entity) {
 		Velocity velocity = entity.getComponent(Velocity.BIT_PATTERN);
 		Position position = entity.getComponent(Position.BIT_PATTERN);
@@ -26,6 +27,8 @@ public class Move implements Module {
 		position.setPosition(
 				position.getVector().add(velocity.getVector())
 		);
+
+		
 
 		EventHandler.INSTANCE.report(new MoveEvent(entity));
 		//TODO När ett event skickas från CollisionModule så kan Move ( eller annan modul lyssna)

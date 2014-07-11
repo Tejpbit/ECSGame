@@ -7,7 +7,7 @@ import com.tejp.ecsgame.entitys.Entity;
  */
 public class MoveEvent implements Event{
 
-	private Entity entity;
+	private final Entity entity;
 
 	public MoveEvent(Entity entity) {
 		this.entity = entity;

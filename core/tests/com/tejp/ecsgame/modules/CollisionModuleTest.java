@@ -22,7 +22,7 @@ public class CollisionModuleTest {
 
 	@Test
 	public void testDoAction() throws Exception {
-		Entity e = new Entity(new Position(3, 5), new Collision(new Rectangle(0, 0, 4, 4)));
+		final Entity e = new Entity(new Position(3, 5), new Collision(new Rectangle(0, 0, 4, 4)));
 
 		boolean collision = false;
 
