@@ -3,6 +3,7 @@ package com.tejp.ecsgame.modules;
 import com.badlogic.gdx.math.Rectangle;
 import com.tejp.ecsgame.Vector2D;
 import com.tejp.ecsgame.components.Collision;
+import com.tejp.ecsgame.components.Component;
 import com.tejp.ecsgame.components.Position;
 import com.tejp.ecsgame.entitys.Entity;
 import com.tejp.ecsgame.event.CollisionEvent;
@@ -11,6 +12,8 @@ import com.tejp.ecsgame.event.EventListener;
 import com.tejp.ecsgame.event.MoveEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -18,15 +21,10 @@ import java.util.List;
  */
 public class CollisionModule implements Module, EventListener<MoveEvent> {
 
-	List<Entity> entitiesWithCollision = new ArrayList<>();
+	private final List<Entity> entitiesWithCollision = new ArrayList<>();
 
 	public CollisionModule() {
 		EventHandler.INSTANCE.addListener(MoveEvent.class, this);
-	}
-
-	@Override
-	public long getBitPattern() {
-		return Position.BIT_PATTERN | Collision.BIT_PATTERN;
 	}
 
 	public void addCollisionEntity(Entity entity) {
@@ -39,10 +37,15 @@ public class CollisionModule implements Module, EventListener<MoveEvent> {
 	}
 
 	@Override
+	public Collection<Class<? extends Component>> getRequiredComponents() {
+		return Arrays.asList(Position.class, Collision.class);
+	}
+
+	@Override
 	public void doAction(Entity entity) {
 
-		Vector2D posEntityToCheck = ((Position)entity.getComponent(Position.BIT_PATTERN)).getVector();
-		Rectangle collisionEntityToCheck = ((Collision)entity.getComponent(Collision.BIT_PATTERN)).getRect();
+		Vector2D posEntityToCheck = ((Position)entity.getComponent(Position.class)).getVector();
+		Rectangle collisionEntityToCheck = ((Collision)entity.getComponent(Collision.class)).getRect();
 
 		float aLeft = (float)posEntityToCheck.getX();
 		float aRight = aLeft + collisionEntityToCheck.width;
@@ -65,8 +68,8 @@ public class CollisionModule implements Module, EventListener<MoveEvent> {
 	}
 
 	private void fireEventIfCollision(Entity entityA, Entity entityB, float aLeft, float aTop, float aRight, float aBot) {
-		Vector2D position = ((Position)entityB.getComponent(Position.BIT_PATTERN)).getVector();
-		Rectangle collision = ((Collision)entityB.getComponent(Collision.BIT_PATTERN)).getRect();
+		Vector2D position = ((Position)entityB.getComponent(Position.class)).getVector();
+		Rectangle collision = ((Collision)entityB.getComponent(Collision.class)).getRect();
 		float bLeft = (float)position.getX();
 		float bRight = bLeft + collision.width;
 		float bBot = (float)position.getY();

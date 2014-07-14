@@ -9,12 +9,6 @@ import com.tejp.ecsgame.Vector2D;
  * Created by Tejpbit on 2014-07-06.
  */
 public class PlayerInput implements Component {
-	public static long BIT_PATTERN = 0b00000000000000000000000000000010;
-
-	@Override
-	public long getBitPattern() {
-		return BIT_PATTERN;
-	}
 
 	public Vector2D getInput() {
 		return Direction.getDirection(

@@ -11,8 +11,6 @@ import java.util.Map;
  */
 public class Sprite implements Component {
 
-	public static final long BIT_PATTERN = 0b00000000000000000000000000001000;
-
 	private Map<Direction, Animation> anim;
 
 	private Direction lastMoveDirection = Direction.SOUTH;
@@ -26,10 +24,5 @@ public class Sprite implements Component {
 			return anim.get(lastMoveDirection).getKeyFrame(0);
 		lastMoveDirection = direction;
 		return anim.get(direction).getKeyFrame(stateTime, true);
-	}
-
-	@Override
-	public long getBitPattern() {
-		return BIT_PATTERN;
 	}
 }

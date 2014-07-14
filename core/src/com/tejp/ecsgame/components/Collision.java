@@ -7,8 +7,6 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class Collision implements Component {
 
-	public static final long BIT_PATTERN = 0b00000000000000000000000000100000;
-
 	private Rectangle rect;
 
 	public Collision(Rectangle rect) {
@@ -17,10 +15,5 @@ public class Collision implements Component {
 
 	public Rectangle getRect() {
 		return rect;
-	}
-
-	@Override
-	public long getBitPattern() {
-		return BIT_PATTERN;
 	}
 }

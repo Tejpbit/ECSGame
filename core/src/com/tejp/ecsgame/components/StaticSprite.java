@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class StaticSprite implements Component {
 
-	public static final long BIT_PATTERN = 0b00000000000000000000000001000000;
-
 	private TextureRegion textureRegion;
 
 	public StaticSprite(TextureRegion textureRegion) {
@@ -19,8 +17,4 @@ public class StaticSprite implements Component {
 		return textureRegion;
 	}
 
-	@Override
-	public long getBitPattern() {
-		return BIT_PATTERN;
-	}
 }

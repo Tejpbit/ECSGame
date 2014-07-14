@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.tejp.ecsgame.entitys.Game;
 
 public class ECSGame extends ApplicationAdapter {
 	private SpriteBatch spriteBatch;
