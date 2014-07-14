@@ -48,7 +48,6 @@ public enum Direction {
 		return getDirection(goingLeft, goingRight, goingUp, goingDown);
 	}
 
-
 	public static Direction getDirection(boolean left, boolean right, boolean up, boolean down) {
 		int pattern = 0;
 		if (left) pattern += WEST.getBitPattern();

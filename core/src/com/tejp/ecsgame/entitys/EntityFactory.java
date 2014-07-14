@@ -24,13 +24,18 @@ public enum EntityFactory {
 	public List<Entity> getRandomTestEntities() {
 		List<Entity> entities = new ArrayList<>();
 
-		entities.add(new Entity(new Position(100, 100), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
+		entities.add(new Entity(new Position(32, 32), new Collision(new Rectangle(0, 0, 64, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
+		entities.add(new Entity(new Position(64, 64), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
+		entities.add(new Entity(new Position(64, 96), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
+		entities.add(new Entity(new Position(-32, -32), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
+		entities.add(new Entity(new Position(-64, -32), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
+		entities.add(new Entity(new Position(-96, -32), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
 
 		return entities;
 	}
 
-	public Entity getPlayer(Input input) {
-		return new Entity(new Health(), new Position(), new Velocity(), new Collision(new Rectangle(0, 0, 32, 32)), new Sprite(getCreatureAnimation("phoenix.png")), input); //TODO MAGIC STRING?
+	public Entity getPlayer() {
+		return new Entity(new Health(), new Position(), new Velocity(), new Collision(new Rectangle(0, 0, 32, 32)), new Sprite(getCreatureAnimation("phoenix.png")), new PlayerInput()); //TODO MAGIC STRING?
 	}
 
 	private Map<Direction, Animation>getCreatureAnimation(String src) {

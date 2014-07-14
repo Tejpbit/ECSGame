@@ -1,10 +1,8 @@
 package com.tejp.ecsgame.entitys;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.tejp.ecsgame.DesktopInput;
 import com.tejp.ecsgame.Vector2D;
 import com.tejp.ecsgame.components.Collision;
-import com.tejp.ecsgame.components.Input;
 import com.tejp.ecsgame.components.Position;
 import com.tejp.ecsgame.modules.*;
 
@@ -26,8 +24,6 @@ public class Game {
 
 	private Position cameraPosition;
 
-	Input input = new DesktopInput(); // TODO vilken sorts input det är ska bestämmas beroende på vilken platform det körs på. men för tillfället bryr jag mig inte
-
 	public Game(SpriteBatch spriteBatch) {
 		activeModules.add(new Move());
 		activeModules.add(new InputHandler());
@@ -38,7 +34,7 @@ public class Game {
 		passiveModules.add(cm);
 
 		List<Entity> entitiesToAdd = entityFactory.getRandomTestEntities();
-		Entity player = entityFactory.getPlayer(input);
+		Entity player = entityFactory.getPlayer();
 		cameraPosition = player.getComponent(Position.BIT_PATTERN);
 		entitiesToAdd.add(player);
 
@@ -52,7 +48,6 @@ public class Game {
 	}
 
 	public void update() {
-		input.updateInput();
 		activeModules.forEach(m -> getMatchingEntitys(m.getBitPattern()).forEach(e -> m.doAction(e)));
 	}
 
