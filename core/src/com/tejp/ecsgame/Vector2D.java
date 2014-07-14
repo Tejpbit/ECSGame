@@ -45,6 +45,11 @@ public final class Vector2D {
 	    y += vector.y;
     }
 
+	public void add(double x, double y) {
+		this.x += x;
+		this.y += y;
+	}
+
     public double getY() {
         return y;
     }

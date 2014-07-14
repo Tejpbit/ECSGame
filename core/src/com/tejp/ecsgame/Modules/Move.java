@@ -1,6 +1,7 @@
 package com.tejp.ecsgame.modules;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.tejp.ecsgame.Direction;
 import com.tejp.ecsgame.Vector2D;
 import com.tejp.ecsgame.components.Collision;
 import com.tejp.ecsgame.components.Position;
@@ -54,13 +55,19 @@ public class Move implements Module, EventListener<CollisionEvent> {
 		double centerX2 = pos2.getX() + rect2.width/2;
 		double centerY2 = pos2.getY() + rect2.height/2;
 
-
 		double newX = centerX1 - centerX2;
 		double newY = centerY1 - centerY2;
 
 		Position position = event.getEntity1().getComponent(Position.BIT_PATTERN);
+		Direction direction = Direction.getDirection(newX, newY);
 
-		position.move(new Vector2D(newX, newY));
+		float smallestX = Math.abs(event.getaLeftTobRight()) < Math.abs(event.getbLeftToaRight()) ? event.getaLeftTobRight() : event.getbLeftToaRight();
+		float smallestY = Math.abs(event.getaBot_To_bTop()) < Math.abs(event.getbBot_To_aTop()) ? event.getaBot_To_bTop() : event.getbBot_To_aTop();
+
+		if (Math.abs(smallestX) < Math.abs(smallestY))
+			position.move(direction.getX() * smallestX, 0);
+		else
+			position.move(0, direction.getY() * smallestY);
 
 	}
 }

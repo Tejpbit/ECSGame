@@ -36,7 +36,7 @@ public enum Direction {
 	 * @param invertY (if y is up instead of the default down)
 	 */
 	public static Direction getDirection(double x, double y, boolean invertY) {
-		return getDirection(x, -y);
+		return getDirection(x, invertY ? -y : y);
 	}
 
 	public static Direction getDirection(double x, double y) {
