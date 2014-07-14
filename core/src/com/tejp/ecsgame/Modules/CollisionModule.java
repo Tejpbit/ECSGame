@@ -41,40 +41,44 @@ public class CollisionModule implements Module, EventListener<MoveEvent> {
 
 	@Override
 	public void doAction(Entity entity) {
-		Vector2D position = ((Position)entity.getComponent(Position.BIT_PATTERN)).getVector();
-		Rectangle collision = ((Collision)entity.getComponent(Collision.BIT_PATTERN)).getRect();
 
-		float left = (float)position.getX();
-		float bot = (float)position.getY();
 
-		Optional<Entity> overlappingEntity =
-			isOverlapping(
-				entity,
-				left,
-				bot + collision.height,
-				left + collision.width,
-				bot
-			);
+		Optional<Entity> overlappingEntity = isOverlapping(entity);
 		overlappingEntity.ifPresent(e -> EventHandler.INSTANCE.report(new CollisionEvent(entity, e)));
 	}
 
-	private Optional<Entity> isOverlapping(Entity entityToCheck, float left, float top, float right, float bot) {
+	private Optional<Entity> isOverlapping(Entity entityToCheck) {
+
+		Vector2D entityToCheckPos = ((Position)entityToCheck.getComponent(Position.BIT_PATTERN)).getVector();
+		Rectangle entityToCheckCollission = ((Collision)entityToCheck.getComponent(Collision.BIT_PATTERN)).getRect();
+
+		float aLeft = (float)entityToCheckPos.getX();
+		float aRight = aLeft + entityToCheckCollission.width;
+		float aBot = (float)entityToCheckPos.getY();
+		float aTop = aBot + entityToCheckCollission.height;
+
 		for (Entity entity : entitiesWithCollision) {
 			if (entityToCheck == entity) {
 				continue;
 			}
 			Vector2D position = ((Position)entity.getComponent(Position.BIT_PATTERN)).getVector();
 			Rectangle collision = ((Collision)entity.getComponent(Collision.BIT_PATTERN)).getRect();
-			float left2 = (float)position.getX();
-			float right2 = left2 + collision.width;
-			float bot2 = (float)position.getY();
-			float top2 = bot2 + collision.height;
+			float bLeft = (float)position.getX();
+			float bRight = bLeft + collision.width;
+			float bBot = (float)position.getY();
+			float bTop = bBot + collision.height;
+
+			float aLeft_To_bRight = bRight - aLeft;
+			float bLeft_To_aRight = aRight - bLeft;
+			float bBot_To_aTop = aTop - bBot;
+			float aBot_To_bTop = bTop - aBot;
+
 
 			//TODO räkna ut ints för denna kollen och gör kollen genom att jämföra med noll.
 			//skicka sedan med ints i collisionEventet som säger hur långt in i varandra entitysarna är.
 			//sen är det bara kolla vilken av dem som är störst.
 
-			if (left < right2 && right > left2 && top > bot2 && bot < top2)
+			if (aLeft_To_bRight > 0 && bLeft_To_aRight > 0 && bBot_To_aTop > 0 && aBot_To_bTop > 0)
 				return Optional.of(entity);
 		}
 		return Optional.empty();
