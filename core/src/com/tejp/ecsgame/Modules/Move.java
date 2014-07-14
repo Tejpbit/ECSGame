@@ -35,8 +35,6 @@ public class Move implements Module, EventListener<CollisionEvent> {
 			return;
 		position.move(velocity.getVector());
 
-
-		System.out.println("new pos of dood: " + position.getVector().getX() + " " + position.getVector().getY());
 		EventHandler.INSTANCE.report(new MoveEvent(entity));
 	}
 
