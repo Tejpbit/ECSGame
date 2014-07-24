@@ -50,7 +50,7 @@ public class Game {
 	public void update() {
 
 		activeModules.forEach(m -> getMatchingEntitys(m.getRequiredComponents())
-				.stream().peek(System.out::println)
+				//.stream().peek(System.out::println)
 				.forEach(m::doAction));
 	}
 
@@ -64,9 +64,9 @@ public class Game {
 
 	public Collection<Entity> getMatchingEntitys(Collection<Class<? extends Component>> classes) {
 		return entities.stream()
-				.peek(System.out::println)
+				//.peek(System.out::println)
 				.filter(e -> e.hasComponents(classes))
-				.peek(o -> System.out.print("Filterd entity: " + o))
+				//.peek(o -> System.out.print("Filterd entity: " + o))
 				.collect(Collectors.toList());
 	}
 

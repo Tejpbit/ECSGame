@@ -47,15 +47,19 @@ public class CollisionModule implements Module, EventListener<MoveEvent> {
 		Vector2D posEntityToCheck = ((Position)entity.getComponent(Position.class)).getVector();
 		Rectangle collisionEntityToCheck = ((Collision)entity.getComponent(Collision.class)).getRect();
 
-		float aLeft = (float)posEntityToCheck.getX();
-		float aRight = aLeft + collisionEntityToCheck.width;
-		float aBot = (float)posEntityToCheck.getY();
-		float aTop = aBot + collisionEntityToCheck.height;
+
 
 		for (Entity entityWithCollision : entitiesWithCollision) {
+
+			float aLeft = (float)posEntityToCheck.getX();
+			float aRight = aLeft + collisionEntityToCheck.width;
+			float aBot = (float)posEntityToCheck.getY();
+			float aTop = aBot + collisionEntityToCheck.height;
+
 			if (entity == entityWithCollision) {
 				continue;
 			}
+
 			fireEventIfCollision(
 					entity,
 					entityWithCollision,
@@ -64,6 +68,7 @@ public class CollisionModule implements Module, EventListener<MoveEvent> {
 					aRight,
 					aBot
 			);
+
 		}
 	}
 
@@ -81,6 +86,6 @@ public class CollisionModule implements Module, EventListener<MoveEvent> {
 		float aBot_To_bTop = bTop - aBot;
 
 		if (aLeft_To_bRight > 0 && bLeft_To_aRight > 0 && bBot_To_aTop > 0 && aBot_To_bTop > 0)
-					EventHandler.INSTANCE.report(new CollisionEvent(entityA, entityB, aLeft_To_bRight, bLeft_To_aRight, bBot_To_aTop, aBot_To_bTop));
+			EventHandler.INSTANCE.report(new CollisionEvent(entityA, entityB, aLeft_To_bRight, bLeft_To_aRight, bBot_To_aTop, aBot_To_bTop));
 	}
 }

@@ -37,8 +37,8 @@ public class Move implements Module, EventListener<CollisionEvent> {
 
 		if (velocity.getVector().getMagnitude() < 0.00001)
 			return;
-		position.move(velocity.getVector());
 
+		position.move(velocity.getVector());
 		EventHandler.INSTANCE.report(new MoveEvent(entity));
 	}
 
