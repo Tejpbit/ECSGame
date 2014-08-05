@@ -9,13 +9,13 @@ import java.util.Map;
 /**
  * Created by Tejpbit on 2014-07-07.
  */
-public class Sprite implements Component {
+public class AnimSprite implements Component {
 
 	private Map<Direction, Animation> anim;
 
 	private Direction lastMoveDirection = Direction.SOUTH;
 
-	public Sprite(Map<Direction, Animation> anim) {
+	public AnimSprite(Map<Direction, Animation> anim) {
 		this.anim = anim;
 	}
 

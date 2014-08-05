@@ -35,7 +35,7 @@ public class ECSGame extends ApplicationAdapter {
 		camera.update();
 
 		spriteBatch.setProjectionMatrix(camera.combined);
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		spriteBatch.begin();
 		sprite.draw(spriteBatch);

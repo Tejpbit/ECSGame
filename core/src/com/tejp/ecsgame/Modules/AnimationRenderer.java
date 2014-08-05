@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tejp.ecsgame.Direction;
 import com.tejp.ecsgame.Vector2D;
+import com.tejp.ecsgame.components.AnimSprite;
 import com.tejp.ecsgame.components.Component;
 import com.tejp.ecsgame.components.Position;
-import com.tejp.ecsgame.components.Sprite;
 import com.tejp.ecsgame.components.Velocity;
 import com.tejp.ecsgame.entitys.Entity;
 
@@ -27,12 +27,12 @@ public class AnimationRenderer implements Module {
 
 	@Override
 	public Collection<Class<? extends Component>> getRequiredComponents() {
-		return Arrays.asList(Sprite.class, Position.class, Velocity.class);
+		return Arrays.asList(AnimSprite.class, Position.class, Velocity.class);
 	}
 
 	@Override
 	public void doAction(Entity entity) {
-		Sprite sprite = entity.getComponent(Sprite.class);
+		AnimSprite sprite = entity.getComponent(AnimSprite.class);
 		Position pos = entity.getComponent(Position.class);
 		Vector2D vector = ((Velocity)entity.getComponent(Velocity.class)).getVector();
 

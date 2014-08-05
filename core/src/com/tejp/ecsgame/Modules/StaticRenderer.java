@@ -1,7 +1,7 @@
 package com.tejp.ecsgame.modules;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.tejp.ecsgame.Vector2D;
 import com.tejp.ecsgame.components.Component;
 import com.tejp.ecsgame.components.Position;
 import com.tejp.ecsgame.components.StaticSprite;
@@ -30,15 +30,11 @@ public class StaticRenderer implements Module {
 	public void doAction(Entity entity) {
 
 		Position pos = entity.getComponent(Position.class);
-		StaticSprite sprite = entity.getComponent(StaticSprite.class);
+		StaticSprite sSprite = entity.getComponent(StaticSprite.class);
 
-		Vector2D posVector = pos.getVector();
-
-		spriteBatch.draw(
-				sprite.getTextureRegion(),
-				(int)posVector.getX(),
-				(int)posVector.getY()
-		);
+		Sprite s = sSprite.getSprite();
+		s.setPosition((float)pos.getX(), (float)pos.getY());
+		s.draw(spriteBatch);
 
 	}
 }

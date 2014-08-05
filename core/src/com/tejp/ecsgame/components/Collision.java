@@ -13,6 +13,10 @@ public class Collision implements Component {
 		this.rect = rect;
 	}
 
+	public Collision (int width, int height){
+		this.rect = new Rectangle(0, 0, width, height);
+	}
+
 	public Rectangle getRect() {
 		return rect;
 	}

@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by Tejpbit on 2014-07-05.
  */
-public class Entity {
+public final class Entity {
 
 	private final Map<Class<? extends Component>, Component> components = new HashMap<>();
 

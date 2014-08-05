@@ -5,6 +5,13 @@ package com.tejp.ecsgame.components;
  */
 public class Damage implements Component {
 
-	public Damage() {
+	private final int damage;
+
+	public Damage(int damage) {
+		this.damage = damage;
+	}
+
+	public int getDamage() {
+		return damage;
 	}
 }

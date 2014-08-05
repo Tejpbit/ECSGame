@@ -23,6 +23,10 @@ public class InputHandler implements Module {
 		PlayerInput input = entity.getComponent(PlayerInput.class);
 		Velocity velocity = entity.getComponent(Velocity.class);
 
-		velocity.setVelocity(input.getInput());
+		velocity.setVelocity(input.getMoveInput());
+
+		if (input.isAttacking()) {
+			// TODO get attack from weapon component
+		}
 	}
 }

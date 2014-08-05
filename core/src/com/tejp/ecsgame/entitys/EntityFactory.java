@@ -24,21 +24,24 @@ public enum EntityFactory {
 	public List<Entity> getRandomTestEntities() {
 		List<Entity> entities = new ArrayList<>();
 
-		entities.add(new Entity(new Position(-96, -32), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
-		entities.add(new Entity(new Position(-64, -32), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
-		entities.add(new Entity(new Position(-32, -32), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
-		entities.add(new Entity(new Position(32, 32), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
-		entities.add(new Entity(new Position(64, 64), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
-		entities.add(new Entity(new Position(64, 96), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
-		entities.add(new Entity(new Position(128, 32), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
-		entities.add(new Entity(new Position(128, 64), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
-		entities.add(new Entity(new Position(128, 96), new Collision(new Rectangle(0, 0, 32, 32)), new StaticSprite(new TextureRegion(new Texture("bedrock.png"))) ));
+		entities.add(new Entity(new Pickupable(e -> System.out.println(e)), new Position(64, -64), new Collision(8, 8), new StaticSprite("heart.png", 8, 8)));
+		// TODO trigger the PickupAction from somewhere. When collision has been found. Get Pickupable component and get the onPickup and call accept and send in the entity that walked over it.
+
+		entities.add(new Entity(new Position(-96, -32), new Collision(32, 32), new StaticSprite("bedrock.png") ));
+		entities.add(new Entity(new Position(-64, -32), new Collision(32, 32), new StaticSprite("bedrock.png") ));
+		entities.add(new Entity(new Position(-32, -32), new Collision(32, 32), new StaticSprite("bedrock.png") ));
+		entities.add(new Entity(new Position(32, 32), new Collision(32, 32), new StaticSprite("bedrock.png") ));
+		entities.add(new Entity(new Position(64, 64), new Collision(32, 32), new StaticSprite("bedrock.png") ));
+		entities.add(new Entity(new Position(64, 96), new Collision(32, 32), new StaticSprite("bedrock.png") ));
+		entities.add(new Entity(new Position(128, 32), new Collision(32, 32), new StaticSprite("bedrock.png") ));
+		entities.add(new Entity(new Position(128, 64), new Collision(32, 32), new StaticSprite("bedrock.png") ));
+		entities.add(new Entity(new Position(128, 96), new Collision(32, 32), new StaticSprite("bedrock.png") ));
 
 		return entities;
 	}
 
 	public Entity getPlayer() {
-		return new Entity(new Health(), new Position(), new Velocity(), new Collision(new Rectangle(0, 0, 32, 32)), new Sprite(getCreatureAnimation("phoenix.png")), new PlayerInput()); //TODO MAGIC STRING?
+		return new Entity(new Health(), new Position(), new Velocity(), new Collision(new Rectangle(0, 0, 32, 32)), new AnimSprite(getCreatureAnimation("phoenix.png")), new PlayerInput()); //TODO MAGIC STRING?
 	}
 
 	private Map<Direction, Animation>getCreatureAnimation(String src) {

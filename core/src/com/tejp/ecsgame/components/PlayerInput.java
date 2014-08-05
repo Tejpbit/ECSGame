@@ -10,12 +10,16 @@ import com.tejp.ecsgame.Vector2D;
  */
 public class PlayerInput implements Component {
 
-	public Vector2D getInput() {
+	public Vector2D getMoveInput() {
 		return Direction.getDirection(
 				Gdx.input.isKeyPressed(Keys.LEFT),
 				Gdx.input.isKeyPressed(Keys.RIGHT),
 				Gdx.input.isKeyPressed(Keys.DOWN),
 				Gdx.input.isKeyPressed(Keys.UP)
 				).getVector();
+	}
+
+	public boolean isAttacking() {
+		return Gdx.input.isKeyPressed(Keys.SPACE);
 	}
 }
