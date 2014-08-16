@@ -4,9 +4,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.tejp.ecsgame.Vector2D;
 import com.tejp.ecsgame.components.Collision;
 import com.tejp.ecsgame.components.Component;
+import com.tejp.ecsgame.components.InteractLogic;
 import com.tejp.ecsgame.components.Position;
 import com.tejp.ecsgame.entitys.Entity;
-import com.tejp.ecsgame.event.CollisionEvent;
 import com.tejp.ecsgame.event.EventHandler;
 import com.tejp.ecsgame.event.EventListener;
 import com.tejp.ecsgame.event.MoveEvent;
@@ -85,7 +85,17 @@ public class CollisionModule implements Module, EventListener<MoveEvent> {
 		float bBot_To_aTop = aTop - bBot;
 		float aBot_To_bTop = bTop - aBot;
 
-		if (aLeft_To_bRight > 0 && bLeft_To_aRight > 0 && bBot_To_aTop > 0 && aBot_To_bTop > 0)
-			EventHandler.INSTANCE.report(new CollisionEvent(entityA, entityB, aLeft_To_bRight, bLeft_To_aRight, bBot_To_aTop, aBot_To_bTop));
+		if (aLeft_To_bRight > 0 && bLeft_To_aRight > 0 && bBot_To_aTop > 0 && aBot_To_bTop > 0) {
+			runInteractLogic(entityA, entityB);
+			runInteractLogic(entityB, entityA);
+		}
+			//EventHandler.INSTANCE.report(new CollisionEvent(entityA, entityB, aLeft_To_bRight, bLeft_To_aRight, bBot_To_aTop, aBot_To_bTop));
+	}
+
+	private void runInteractLogic(Entity interactor, Entity interactee) {
+		InteractLogic logic = interactor.getComponent(InteractLogic.class);
+		if (logic != null) {
+			logic.getLogic().perform(interactor, interactee);
+		}
 	}
 }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.tejp.ecsgame.Direction;
 import com.tejp.ecsgame.components.*;
+import com.tejp.ecsgame.components.interactionlogic.NoOverlap;
 
 import java.util.*;
 import java.util.stream.IntStream;
@@ -24,8 +25,9 @@ public enum EntityFactory {
 	public List<Entity> getRandomTestEntities() {
 		List<Entity> entities = new ArrayList<>();
 
-		entities.add(new Entity(new Pickupable(e -> System.out.println(e)), new Position(64, -64), new Collision(8, 8), new StaticSprite("heart.png", 8, 8)));
+		entities.add(new Entity(new InteractLogic(new NoOverlap()), new Position(64, -64), new Collision(16, 16), new StaticSprite("heart.png", 16, 16)));
 		// TODO trigger the PickupAction from somewhere. When collision has been found. Get Pickupable component and get the onPickup and call accept and send in the entity that walked over it.
+		// When collision is found. find logic component and run the logic with the two entities Should logic be in the collision component...
 
 		entities.add(new Entity(new Position(-96, -32), new Collision(32, 32), new StaticSprite("bedrock.png") ));
 		entities.add(new Entity(new Position(-64, -32), new Collision(32, 32), new StaticSprite("bedrock.png") ));
